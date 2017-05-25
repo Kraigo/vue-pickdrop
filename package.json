@@ -1,0 +1,11 @@
+{
+  "name": "vue-pickdrop",
+  "version": "1.0.0",
+  "description": "Vuejs directive for mobile drag and drop, pick and drop",
+  "main": "vue-pickdrop.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

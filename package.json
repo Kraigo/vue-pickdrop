@@ -1,11 +1,21 @@
 {
   "name": "vue-pickdrop",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Vuejs directive for mobile drag and drop, pick and drop",
   "main": "vue-pickdrop.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "browserify vue-pickdrop.js -o bundle.js"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "kraigo",
+  "license": "ISC",  
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Kraigo/vue-pickdrop"
+  },
+  "keywords": [
+    "vue",
+    "draganddrop",
+    "touchdrop"
+  ]
 }

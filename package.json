@@ -1,21 +1,93 @@
 {
-  "name": "vue-pickdrop",
-  "version": "1.0.1",
+  "_args": [
+    [
+      {
+        "raw": "vue-pickdrop",
+        "scope": null,
+        "escapedName": "vue-pickdrop",
+        "name": "vue-pickdrop",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "D:\\Personal\\money"
+    ]
+  ],
+  "_from": "vue-pickdrop@latest",
+  "_id": "vue-pickdrop@1.0.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/vue-pickdrop",
+  "_nodeVersion": "6.9.1",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/vue-pickdrop-1.0.1.tgz_1495752688351_0.6938835673499852"
+  },
+  "_npmUser": {
+    "name": "kraigo",
+    "email": "kraigo@live.com"
+  },
+  "_npmVersion": "3.10.6",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "vue-pickdrop",
+    "scope": null,
+    "escapedName": "vue-pickdrop",
+    "name": "vue-pickdrop",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/vue-pickdrop/-/vue-pickdrop-1.0.1.tgz",
+  "_shasum": "0caa5237160f5c1fe2dfaf438fe6be7bf7d39c03",
+  "_shrinkwrap": null,
+  "_spec": "vue-pickdrop",
+  "_where": "D:\\Personal\\money",
+  "author": {
+    "name": "kraigo"
+  },
+  "bugs": {
+    "url": "https://github.com/Kraigo/vue-pickdrop/issues"
+  },
+  "dependencies": {
+    "vue": "^2.3.3"
+  },
   "description": "Vuejs directive for mobile drag and drop, pick and drop",
-  "main": "vue-pickdrop.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "browserify vue-pickdrop.js -o bundle.js"
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "0caa5237160f5c1fe2dfaf438fe6be7bf7d39c03",
+    "tarball": "https://registry.npmjs.org/vue-pickdrop/-/vue-pickdrop-1.0.1.tgz"
   },
-  "author": "kraigo",
-  "license": "ISC",  
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Kraigo/vue-pickdrop"
-  },
+  "gitHead": "b589143c8a11950aa10f602d2978febe91b42c5e",
+  "homepage": "https://github.com/Kraigo/vue-pickdrop#readme",
   "keywords": [
     "vue",
     "draganddrop",
     "touchdrop"
-  ]
+  ],
+  "license": "ISC",
+  "main": "vue-pickdrop.js",
+  "maintainers": [
+    {
+      "name": "kraigo",
+      "email": "kraigo@live.com"
+    }
+  ],
+  "name": "vue-pickdrop",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kraigo/vue-pickdrop.git"
+  },
+  "scripts": {
+    "build": "browserify vue-pickdrop.js -o bundle.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.1"
 }

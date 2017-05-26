@@ -3,6 +3,8 @@ vue-pickdrop
 
 Vuejs directive for mobile drag and drop, pick and drop
 
+[ONLINE DEMO](https://codepen.io/Kraigo/full/YVgmZE/)
+
 ## Usage
 
 There are two directives: `v-pickdrag` and `v-pickdrop`.

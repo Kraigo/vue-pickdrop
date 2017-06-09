@@ -149,14 +149,14 @@ var VuePickdrop = {
                     }
                 },
                 unbind: function(el) {
-                    el.removeEventLister('touchstart');
-                    el.removeEventLister('touchmove');
-                    el.removeEventLister('touchend');
-                    el.removeEventLister('pickdrag:move');
+                    // el.removeEventLister('touchstart');
+                    // el.removeEventLister('touchmove');
+                    // el.removeEventLister('touchend');
+                    // el.removeEventLister('pickdrag:move');
 
-                    el.removeEventLister('mousedown');
-                    el.removeEventLister('mousemove');
-                    el.removeEventLister('mouseup');
+                    // el.removeEventLister('mousedown');
+                    // el.removeEventLister('mousemove');
+                    // el.removeEventLister('mouseup');
                 }
             })
 
@@ -189,9 +189,9 @@ var VuePickdrop = {
                     }
                 },
                 unbind: function(el) {
-                    el.removeEventLister('pickdrop:enter');
-                    el.removeEventLister('pickdrop:leave');
-                    el.removeEventLister('pickdrop:drop');
+                    // el.removeEventLister('pickdrop:enter');
+                    // el.removeEventLister('pickdrop:leave');
+                    // el.removeEventLister('pickdrop:drop');
                 }
             })
         }

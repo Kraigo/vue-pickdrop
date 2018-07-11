@@ -22,6 +22,7 @@ var VuePickdrop = {
             }
 
             Vue.directive('pickdrag', {
+                listeners: [],
                 bind: function(el, binding, vnode) {
 
                     var tags = Object.keys(binding.modifiers);
@@ -56,46 +57,60 @@ var VuePickdrop = {
 
                     /* EVENT LISTENERS */
 
-                    el.addEventListener('touchstart', function(e) {
+                    binding.def.listeners = [
+                        ['touchstart', onTochStart, { passive: false }],
+                        ['touchmove', onTouchMove, { passive: false }],
+                        ['touchend', onTouchEnd],
+                        ['mousemove', onMouseMove],
+                        ['mouseup', onMouseUp],
+                        ['mousedown', onMouseDown],
+                        ['pickdrag:move', onPickdragMove]
+                    ];
+                    
+                    binding.def.listeners.forEach(function(args) {
+                        el.addEventListener.apply(el, args);
+                    });
+
+                    function onTochStart(e) {
                         e.preventDefault();
                         onStart(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
-                    }, { passive: false })
+                    }
 
-                    el.addEventListener('touchmove', function(e) {
+                    function onTouchMove(e) {
                         e.preventDefault();
                         onMove(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
-                    }, { passive: false })
+                    }
 
-                    el.addEventListener('touchend', function(e) {
+                    function onTouchEnd(e) {
                         onEnd();
-                    })
+                    }
 
-                    el.addEventListener('mousedown', function(e) {
-                        if (e.which === 1) {
-                            isMouseDown = true;
-                            onStart(e.clientX, e.clientY);
-                        }
-                    })
-
-                    el.addEventListener('mousemove', function(e) {
+                    function onMouseMove(e) {
                         if (!drag && isMouseDown) {
                             drag = e.target;
                             onStart(e.clientX, e.clientY);
                         }
-                    })
-
-                    el.addEventListener('pickdrag:move', function(e) {
-                        e.preventDefault();
-                        onMove(e.detail.clientX, e.detail.clientY);
-                    })
-
-                    el.addEventListener('mouseup', function(e) {
+                    }
+                    
+                    function onMouseUp(e) {
                         if (e.which === 1) {
                             isMouseDown = false;
                         }
                         drag = null;
                         onEnd();
-                    })
+                    }
+
+                    function onMouseDown(e) {
+                        if (e.which === 1) {
+                            isMouseDown = true;
+                            onStart(e.clientX, e.clientY);
+                        }
+                    }
+
+                    function onPickdragMove(e) {
+                        e.preventDefault();
+                        onMove(e.detail.clientX, e.detail.clientY);
+                    }
 
                     function onStart(x, y) {
                         el.classList.add('pickdrag');
@@ -148,19 +163,15 @@ var VuePickdrop = {
                         el.style.transform = "translate3d(" + x + "px, " + y + "px, 0px)";
                     }
                 },
-                unbind: function(el) {
-                    // el.removeEventLister('touchstart');
-                    // el.removeEventLister('touchmove');
-                    // el.removeEventLister('touchend');
-                    // el.removeEventLister('pickdrag:move');
-
-                    // el.removeEventLister('mousedown');
-                    // el.removeEventLister('mousemove');
-                    // el.removeEventLister('mouseup');
+                unbind: function(el, binding) {
+                    binding.def.listeners.forEach(function(args) {
+                        el.removeEventListener.apply(el, args);
+                    })
                 }
             })
 
             Vue.directive('pickdrop', {
+                listeners: [],
                 bind: function(el, binding, vnode) {
 
                     var tags = Object.keys(binding.modifiers);
@@ -168,30 +179,40 @@ var VuePickdrop = {
 
                     el.setAttribute('droppable', true);
 
-                    el.addEventListener('pickdrop:enter', function(e) {
+                    binding.def.listeners = [
+                        ['pickdrop:enter', onPickdropEnter],
+                        ['pickdrop:leave', onPickdropLeave],
+                        ['pickdrop:drop', onPickdropDrop]
+                    ];
+                    
+                    binding.def.listeners.forEach(function(args) {
+                        el.addEventListener.apply(el, args);
+                    });
+
+                    function onPickdropEnter(e) {
                         if (checkTags(e)) {
                             el.classList.add('pickdrop')
                         }
-                    });
+                    }
 
-                    el.addEventListener('pickdrop:leave', function() {
+                    function onPickdropLeave (e) {
                         el.classList.remove('pickdrop')
-                    });
+                    }
 
-                    el.addEventListener('pickdrop:drop', function(e) {
+                    function onPickdropDrop(e) {
                         if (checkTags(e)) {
                             emit(vnode, 'drop', { dragData: e.detail.data, dropData: data });
                         }
-                    })
+                    }
 
                     function checkTags(e) {
                         return tags.length === 0 || tags.some(t => e.detail.tags.indexOf(t) >= 0);
                     }
                 },
-                unbind: function(el) {
-                    // el.removeEventLister('pickdrop:enter');
-                    // el.removeEventLister('pickdrop:leave');
-                    // el.removeEventLister('pickdrop:drop');
+                unbind: function(el, binding) {
+                    binding.def.listeners.forEach(function(args) {
+                        el.removeEventListener.apply(el, args);
+                    })
                 }
             })
         }

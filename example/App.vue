@@ -30,14 +30,16 @@
             </div>
     
         </div>
-        <div class="dropitem" v-pickdrop="'Food'" @drop="dropHandler">
-            <p>Food</p>
-        </div>
-        <div class="dropitem" v-pickdrop.fruit="'Fruit'" @drop="dropHandler">
-            <p>Fruit</p>
-        </div>
-        <div class="dropitem" v-pickdrop.red="'Red'" @drop="dropHandler">
-            <p>Red</p>
+        <div v-if="hide == false">
+            <div class="dropitem" v-pickdrop="'Food'" @drop="dropHandler">
+                <p>Food</p>
+            </div>
+            <div class="dropitem" v-pickdrop.fruit="'Fruit'" @drop="dropHandler">
+                <p>Fruit</p>
+            </div>
+            <div class="dropitem" v-pickdrop.red="'Red'" @drop="dropHandler">
+                <p>Red</p>
+            </div>
         </div>
     </div>
 </template>

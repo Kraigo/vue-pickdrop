@@ -1,6 +1,6 @@
 {
   "name": "vue-pickdrop",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Vuejs directive for mobile drag and drop, pick and drop",
   "main": "src/vue-pickdrop.js",
   "scripts": {

@@ -3,6 +3,7 @@
   "version": "1.0.4",
   "description": "Vuejs directive for mobile drag and drop, pick and drop",
   "main": "src/vue-pickdrop.js",
+  "typings": "src/vue-pickdrop.d.ts",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"

@@ -25,6 +25,7 @@ var VuePickdrop = {
                 listeners: [],
                 bind: function(el, binding, vnode) {
 
+                    var started = false;
                     var tags = Object.keys(binding.modifiers);
                     var data = binding.value || binding.expression;
                     var startX = 0;
@@ -36,6 +37,8 @@ var VuePickdrop = {
                     var scroller = document.scrollingElement;
                     var maxScrollSpeed = 20;
                     var autoScrollTriggerOffset = 50;
+                    var startDelay = 100;
+                    var startDelayTimer = null;
 
                     /* CUSTOM EVENTS */
 
@@ -77,16 +80,28 @@ var VuePickdrop = {
                     });
 
                     function onTochStart(e) {
-                        e.preventDefault();
-                        onStart(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
+                        // e.preventDefault();
+                        startDelayTimer = setTimeout(function() {
+                            started = true;
+                            onStart(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
+                        }, startDelay)
                     }
 
                     function onTouchMove(e) {
-                        e.preventDefault();
-                        onMove(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
+                        if (startDelayTimer) {
+                            clearTimeout(startDelayTimer);
+                            startDelayTimer = null;
+                        }
+                        if (started) {
+                            e.preventDefault();
+                            onMove(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
+                        } else {
+                            started = false;
+                        }
                     }
 
                     function onTouchEnd(e) {
+                        started = false;
                         onEnd();
                     }
 

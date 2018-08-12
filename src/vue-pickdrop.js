@@ -29,8 +29,13 @@ var VuePickdrop = {
                     var data = binding.value || binding.expression;
                     var startX = 0;
                     var startY = 0;
+                    var startScrollX = 0;
+                    var startScrollY = 0;
                     var underTouch = [];
                     var isMouseDown = false;
+                    var scroller = document.scrollingElement;
+                    var maxScrollSpeed = 20;
+                    var autoScrollTriggerOffset = 50;
 
                     /* CUSTOM EVENTS */
 
@@ -72,7 +77,7 @@ var VuePickdrop = {
                     });
 
                     function onTochStart(e) {
-                        e.preventDefault();
+                        // e.preventDefault();
                         onStart(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
                     }
 
@@ -118,12 +123,17 @@ var VuePickdrop = {
                         el.style.position = 'relative';
                         startX = x;
                         startY = y;
+                        startScrollX = scroller.scrollLeft;
+                        startScrollY = scroller.scrollTop
                     }
 
                     function onMove(x, y) {
                         var deltaX = x - startX;
                         var deltaY = y - startY;
-                        setPosition(deltaX, deltaY);
+                        var delatScrollX = startScrollX - scroller.scrollLeft;
+                        var delatScrollY = startScrollY - scroller.scrollTop;
+                        autoScroll(x, y);
+                        setPosition(deltaX - delatScrollX, deltaY - delatScrollY);
 
                         var currentDrops = document.elementsFromPoint(x, y)
                             .filter(function(elm) {
@@ -161,6 +171,36 @@ var VuePickdrop = {
 
                     function setPosition(x, y) {
                         el.style.transform = "translate3d(" + x + "px, " + y + "px, 0px)";
+                    }
+
+                    function autoScroll(x, y) {
+                        var viewWidth = scroller.clientWidth;
+                        var viewHeight = scroller.clientHeight;
+                        var leftOverlap = autoScrollTriggerOffset;
+                        var rightOverlap = viewWidth - autoScrollTriggerOffset;
+                        var topOverlap = autoScrollTriggerOffset;
+                        var bottomOverlap = viewHeight - autoScrollTriggerOffset;
+                        
+                        if (x > rightOverlap) {                          
+                            scroll(x - rightOverlap, 0);
+                        } else if (x < leftOverlap) {
+                            scroll(x - leftOverlap, 0);
+                        }
+
+                        if (y > bottomOverlap) {                         
+                            scroll(0, y - bottomOverlap);
+                        } else if (y < topOverlap) {
+                            scroll(0, y - topOverlap);
+                        }
+                    }
+
+                    function scroll(x, y) {
+                        if (x) {
+                            scroller.scrollLeft += Math.min(scroller.scrollWidth - scroller.scrollLeft, x, maxScrollSpeed);
+                        }
+                        if (y) {
+                            scroller.scrollTop += Math.min(scroller.scrollHeight - scroller.scrollTop, y, maxScrollSpeed);
+                        }
                     }
                 },
                 unbind: function(el, binding) {

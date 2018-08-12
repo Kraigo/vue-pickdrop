@@ -77,7 +77,7 @@ var VuePickdrop = {
                     });
 
                     function onTochStart(e) {
-                        // e.preventDefault();
+                        e.preventDefault();
                         onStart(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
                     }
 

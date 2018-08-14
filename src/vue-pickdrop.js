@@ -72,7 +72,8 @@ var VuePickdrop = {
                         ['mousemove', onMouseMove],
                         ['mouseup', onMouseUp],
                         ['mousedown', onMouseDown],
-                        ['pickdrag:move', onPickdragMove]
+                        ['pickdrag:move', onPickdragMove],
+                        ['contextmenu', onContextMenu]
                     ];
                     
                     binding.def.listeners.forEach(function(args) {
@@ -102,6 +103,7 @@ var VuePickdrop = {
 
                     function onTouchEnd(e) {
                         started = false;
+                        clearTimeout(startDelayTimer);
                         onEnd();
                     }
 
@@ -130,6 +132,12 @@ var VuePickdrop = {
                     function onPickdragMove(e) {
                         e.preventDefault();
                         onMove(e.detail.clientX, e.detail.clientY);
+                    }
+
+                    function onContextMenu(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        return false;
                     }
 
                     function onStart(x, y) {
